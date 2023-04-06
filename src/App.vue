@@ -1,43 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/vue">Vue</router-link> |
-      <router-link to="/vue/about">Vue about</router-link>
-    </div>
-    <button @click="onClick">loadMicroApp:vue/about</button>
+    <el-menu
+      :default-active="activeIndex"
+      mode="horizontal"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+      :router="true"
+    >
+      <el-menu-item index="/">Main Home</el-menu-item>
+      <el-menu-item index="/about">Main About</el-menu-item>
+      <el-menu-item index="/vue">Vue Home</el-menu-item>
+      <el-menu-item index="/vue/about">Vue About</el-menu-item>
+    </el-menu>
     <router-view />
     <div id="container"></div>
   </div>
 </template>
 
 <script>
-import { loadMicroApp } from "qiankun";
 export default {
   data() {
     return {
       vueApp: null,
+      activeIndex: "/",
     };
   },
-  methods: {
-    onClick() {
-      if (this.vueApp) {
-        console.log("this.vueApp", this.vueApp);
-        this.$router.push("/vue/about");
-      } else {
-        this.vueApp = loadMicroApp({
-          name: "app-vue",
-          entry: "//localhost:8081/#/vue/about",
-          container: "#container",
-        });
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 
 <style>
+body {
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
